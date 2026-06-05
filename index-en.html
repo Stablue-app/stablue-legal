@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy & Terms of Use – Stablue</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --bg: #0A1628;
+      --bg2: #0D1C35;
+      --primary: #1E4FD8;
+      --light: #4A90D9;
+      --glow: #6FB3FF;
+      --text: #F0F4FF;
+      --muted: #8A9BBF;
+      --dim: #4A5C7A;
+      --border: rgba(30, 79, 216, 0.2);
+      --border-hover: rgba(74, 144, 217, 0.45);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      direction: ltr;
+      font-size: 15.5px;
+      line-height: 1.9;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(30,79,216,0.18) 0%, transparent 70%);
+      top: -120px; left: -120px;
+      animation-delay: 0s;
+    }
+    .orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(74,144,217,0.1) 0%, transparent 70%);
+      bottom: 10%; right: -100px;
+      animation-delay: -8s;
+    }
+    @keyframes drift {
+      from { transform: translate(0, 0) scale(1); }
+      to   { transform: translate(40px, 30px) scale(1.08); }
+    }
+
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 80px 40px 0;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(30,79,216,0.12);
+      border: 1px solid rgba(30,79,216,0.3);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--light);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--glow);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--glow);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-size: 44px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #F0F4FF 30%, #4A90D9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      color: var(--dim);
+      margin-bottom: 52px;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 3px;
+      height: 0%;
+      background: linear-gradient(to bottom, var(--primary), var(--glow));
+      z-index: 100;
+      transition: height 0.1s ease;
+      border-radius: 0 0 2px 2px;
+    }
+
+    .content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      position: relative;
+      background: rgba(13, 28, 53, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 36px;
+      margin-bottom: 10px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .section:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 0 30px rgba(30,79,216,0.08), inset 0 0 30px rgba(30,79,216,0.02);
+    }
+
+    .section::before {
+      content: attr(data-num);
+      position: absolute;
+      top: -16px;
+      right: 20px;
+      font-size: 100px;
+      font-weight: 900;
+      color: rgba(30,79,216,0.06);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; left: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(74,144,217,0.4), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .section:hover::after { opacity: 1; }
+
+    h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .num-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--light);
+      background: rgba(30,79,216,0.15);
+      border: 1px solid rgba(30,79,216,0.3);
+      border-radius: 6px;
+      padding: 2px 9px;
+      letter-spacing: 0.8px;
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-size: 15px;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      margin: 10px 0 6px;
+    }
+    ul li {
+      color: var(--muted);
+      padding: 3px 0 3px 18px;
+      position: relative;
+      font-size: 15px;
+    }
+    ul li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--light);
+      font-size: 22px;
+      top: -2px;
+      line-height: 1.9;
+    }
+
+    a { color: var(--light); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--glow); }
+
+    .note {
+      background: rgba(30,79,216,0.07);
+      border: 1px solid rgba(30,79,216,0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 14.5px;
+      color: var(--muted);
+      margin: 16px 0 0;
+      line-height: 1.8;
+    }
+    .note strong { color: var(--light); }
+
+    .warning {
+      background: rgba(232,85,85,0.06);
+      border: 1px solid rgba(232,85,85,0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 14.5px;
+      color: #E85555;
+      margin: 16px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .warning::before {
+      content: '⚠';
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .section-contact {
+      background: linear-gradient(135deg, rgba(30,79,216,0.15) 0%, rgba(13,28,53,0.7) 100%);
+      border-color: rgba(30,79,216,0.35);
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 12px 22px;
+      background: rgba(30,79,216,0.15);
+      border: 1px solid rgba(30,79,216,0.35);
+      border-radius: 12px;
+      color: var(--light);
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+
+    .contact-email:hover {
+      background: rgba(30,79,216,0.25);
+      border-color: rgba(74,144,217,0.6);
+      color: var(--glow);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(30,79,216,0.2);
+    }
+
+    .footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 40px 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-inner {
+      border-top: 1px solid rgba(30,48,85,0.6);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dim);
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 48px 20px 0; }
+      h1 { font-size: 28px; }
+      .content { padding: 0 20px 64px; }
+      .footer { padding: 0 20px 48px; }
+      .section { padding: 22px 20px; }
+      .section::before { font-size: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<a href="index.html" style="position:fixed;top:20px;right:20px;z-index:200;display:inline-flex;align-items:center;gap:6px;background:rgba(30,79,216,0.15);border:1px solid rgba(30,79,216,0.35);border-radius:20px;padding:6px 14px;font-family:'Inter',Arial,sans-serif;font-size:13px;font-weight:600;color:#4A90D9;text-decoration:none;transition:all 0.2s;" onmouseover="this.style.background='rgba(30,79,216,0.28)'" onmouseout="this.style.background='rgba(30,79,216,0.15)'">🌐 עברית</a>
+
+<div class="hero">
+  <div class="hero-badge">Stablue</div>
+  <h1>Privacy Policy<br />&amp; Terms of Use</h1>
+  <div class="hero-sub">Last updated: April 2026 &nbsp;·&nbsp; Version 1.0</div>
+</div>
+
+<div class="content">
+
+  <div class="section" data-num="01">
+    <h2><span class="num-tag">01</span> About Stablue</h2>
+    <p>Stablue is an emotional support app — practical tools for moments of anxiety, stress, and restlessness. The app is operated by Liron Nir, an independent developer based in Israel.</p>
+    <p>Your privacy matters to us. This document plainly explains what we collect, why, and how your information is protected.</p>
+    <p>By using the app, you agree to this policy. If you do not agree, please discontinue use.</p>
+  </div>
+
+  <div class="section" data-num="02">
+    <h2><span class="num-tag">02</span> What We Collect</h2>
+    <p>We collect only what is necessary to operate the service:</p>
+    <ul>
+      <li>Account details you provide, such as your email address</li>
+      <li>Content you choose to enter, such as mood logs and personal notes</li>
+      <li>App settings and usage preferences</li>
+      <li>Basic technical data for operation, security, and service improvement</li>
+    </ul>
+    <p>Parts of the app are available without signing in — in that case, no data is stored outside your device.</p>
+    <div class="note">
+      <strong>Your notes are private:</strong> Personal notes and entries are encrypted before being stored. No one — including us — can read their contents.
+    </div>
+  </div>
+
+  <div class="section" data-num="03">
+    <h2><span class="num-tag">03</span> How We Use Your Data</h2>
+    <p>Your data is used to operate the service, improve your experience, maintain security, prevent misuse, and manage subscriptions and premium features.</p>
+    <p>We do not sell personal data to any third party, nor do we use it for advertising.</p>
+  </div>
+
+  <div class="section" data-num="04">
+    <h2><span class="num-tag">04</span> Third-Party Services</h2>
+    <p>The app relies on infrastructure providers for storage, processing, and certain features. Each provider receives only the minimum data required for its function and is bound by strict data protection terms.</p>
+    <p>We do not sell, rent, or transfer personal data to third parties for any commercial purpose.</p>
+  </div>
+
+  <div class="section" data-num="05">
+    <h2><span class="num-tag">05</span> Data Security</h2>
+    <p>We invest in high-level security: data encryption, secure communications, and strict access controls. That said, no system is completely immune, and we cannot guarantee absolute protection against every threat.</p>
+  </div>
+
+  <div class="section" data-num="06">
+    <h2><span class="num-tag">06</span> Data Retention</h2>
+    <p>Data is retained for as long as it is needed to operate the service or meet legal requirements. Data that is no longer needed is deleted or anonymized.</p>
+  </div>
+
+  <div class="section" data-num="07">
+    <h2><span class="num-tag">07</span> Your Rights</h2>
+    <p>Under Israeli Privacy Protection Law (Amendment 13) and applicable international regulations, you have the right to access, correct, or delete your data, and to withdraw consent at any time.</p>
+    <p>To submit a request: <a href="mailto:lironnir100@gmail.com">lironnir100@gmail.com</a> — we handle all requests within 30 days.</p>
+  </div>
+
+  <div class="section" data-num="08">
+    <h2><span class="num-tag">08</span> Artificial Intelligence</h2>
+    <p>Some app features use AI processing. Conversation content is processed in real time and is not stored after the session ends.</p>
+    <p>AI responses are a support tool only — they are not always accurate and do not constitute professional advice of any kind.</p>
+  </div>
+
+  <div class="section" data-num="09">
+    <h2><span class="num-tag">09</span> Disclaimer</h2>
+    <p>Stablue is not a medical, psychological, or psychiatric service. Nothing in the app — including AI responses — constitutes a diagnosis, prescription, or medical recommendation, or a substitute for professional treatment.</p>
+    <p>The service is provided as-is, without warranty of any kind. The operator shall not be liable for any damages arising from use of the service, reliance on its content, or failure to seek professional help.</p>
+    <div class="warning">
+      Mental health emergency — contact immediately: <strong>ERAN 1201</strong> (Israel) or your local emergency services.
+    </div>
+  </div>
+
+  <div class="section" data-num="10">
+    <h2><span class="num-tag">10</span> Limitation of Liability &amp; Indemnification</h2>
+    <p>The service is provided without warranty, express or implied. Where law limits full exclusion of liability, it shall not exceed the amount actually paid in the six months preceding the event.</p>
+    <p>By using the app, you agree to indemnify the operator against any claim, damage, or loss arising from breach of these terms, misuse of the service, or infringement of third-party rights.</p>
+    <p>The operator is not liable for events beyond its reasonable control, including infrastructure failures, cyberattacks, regulatory changes, or unforeseen events.</p>
+  </div>
+
+  <div class="section" data-num="11">
+    <h2><span class="num-tag">11</span> Intellectual Property</h2>
+    <p>All intellectual property in Stablue — design, interface, content, concepts, and methods — belongs exclusively to Liron Nir. Use of the app does not grant any license.</p>
+    <p>Reproducing, modifying, reverse-engineering, scraping, or making commercial use of the service without prior written permission is strictly prohibited.</p>
+  </div>
+
+  <div class="section" data-num="12">
+    <h2><span class="num-tag">12</span> Age Requirement</h2>
+    <p>The service is intended for users aged 17 and above. We do not knowingly collect data from children under 13. If such data is discovered, it will be deleted immediately.</p>
+  </div>
+
+  <div class="section" data-num="13">
+    <h2><span class="num-tag">13</span> Policy Updates</h2>
+    <p>We may update this policy from time to time. For material changes, advance notice will be given within the app. Continued use after an update constitutes acceptance of the revised policy.</p>
+  </div>
+
+  <div class="section" data-num="14">
+    <h2><span class="num-tag">14</span> Governing Law &amp; Jurisdiction</h2>
+    <p>This policy is governed by the laws of the State of Israel. Any dispute shall be resolved in the competent courts of Tel Aviv-Jaffa. Before any proceedings — we welcome resolving matters directly.</p>
+  </div>
+
+  <div class="section section-contact" data-num="15">
+    <h2><span class="num-tag">15</span> Contact Us</h2>
+    <p>For any question, request, or privacy-related inquiry:</p>
+    <a href="mailto:lironnir100@gmail.com" class="contact-email">
+      ✉ &nbsp;lironnir100@gmail.com
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="footer-inner">
+    <span>© 2026 Stablue — Liron Nir. All rights reserved.</span>
+    <span>Version 1.0 · April 2026</span>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    bar.style.height = pct + '%';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 60);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
