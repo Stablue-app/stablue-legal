@@ -1,88 +1,359 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>תנאי שימוש – Stablue</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, Arial, sans-serif;
-    background: #0A1628;
-    color: #C8D8FF;
-    padding: 40px 24px 80px;
-    max-width: 700px;
-    margin: 0 auto;
-    line-height: 1.7;
-    direction: rtl;
-  }
-  h1 { font-size: 26px; color: #fff; margin-bottom: 8px; }
-  .updated { font-size: 13px; color: #6080AA; margin-bottom: 36px; }
-  h2 { font-size: 17px; color: #A0C0FF; margin: 28px 0 10px; }
-  p { font-size: 15px; margin-bottom: 12px; }
-  a { color: #6FB3FF; }
-  .back { display: inline-block; margin-bottom: 28px; color: #6FB3FF; text-decoration: none; font-size: 15px; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תנאי שימוש – Stablue</title>
+  <meta name="description" content="תנאי השימוש באפליקציית Stablue." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal: #38E8CF;
+      --violet: #8B6CFF;
+      --muted: rgba(208,215,255,.84);
+      --faint: rgba(150,165,235,.62);
+      --glass: rgba(16,20,62,.62);
+    }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      font-family: 'Heebo', sans-serif; background: #060A26; color: #fff;
+      direction: rtl; text-align: right; overflow-x: hidden; -webkit-font-smoothing: antialiased;
+      font-size: 16px; line-height: 1.85;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background: linear-gradient(170deg, #120838 0%, #0A0C38 42%, #070C30 74%, #050D28 100%);
+    }
+    /* slow aurora */
+    .aurora { position: fixed; inset: -20%; z-index: 0; pointer-events: none; filter: blur(70px); opacity: .9; }
+    .aurora i { position: absolute; border-radius: 50%; mix-blend-mode: screen; animation: float 26s ease-in-out infinite alternate; }
+    .aurora i:nth-child(1) { width: 46vw; height: 46vw; top: 4%; right: 10%; background: radial-gradient(circle, rgba(112,52,230,.42), transparent 65%); }
+    .aurora i:nth-child(2) { width: 40vw; height: 40vw; top: 40%; left: 4%; background: radial-gradient(circle, rgba(40,90,240,.34), transparent 65%); animation-duration: 32s; animation-delay: -9s; }
+    .aurora i:nth-child(3) { width: 30vw; height: 30vw; bottom: 2%; right: 30%; background: radial-gradient(circle, rgba(56,232,207,.16), transparent 65%); animation-duration: 38s; animation-delay: -18s; }
+    @keyframes float { 0% { transform: translate(0,0) scale(1); } 50% { transform: translate(4vw,-3vw) scale(1.12); } 100% { transform: translate(-3vw,4vw) scale(.95); } }
+    .grain {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+      background-image: linear-gradient(rgba(80,110,255,.022) 1px, transparent 1px), linear-gradient(90deg, rgba(80,110,255,.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+      -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%);
+    }
+    a { color: #8FE9DA; text-decoration: none; transition: color .2s; }
+    a:hover { color: #fff; }
+    bdi { white-space: nowrap; }
+
+    .progress { position: fixed; top: 0; right: 0; height: 2px; width: 0; z-index: 1000; background: linear-gradient(90deg, var(--violet), var(--teal)); box-shadow: 0 0 14px rgba(56,232,207,.7); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900; height: 66px;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+      background: rgba(7,4,26,.7); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
+      border-bottom: 1px solid rgba(140,110,255,.12);
+    }
+    .brand { display: flex; align-items: center; gap: 11px; color: #fff; }
+    .brand img { width: 36px; height: 36px; border-radius: 10px; box-shadow: 0 0 26px rgba(130,46,245,.55); }
+    .brand span { font-size: 16px; font-weight: 900; letter-spacing: 3.5px; }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .pill {
+      display: inline-flex; align-items: center; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; color: #fff;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(170,160,255,.22); transition: background .2s, border-color .2s;
+    }
+    .pill:hover { background: rgba(255,255,255,.1); border-color: rgba(170,160,255,.45); color: #fff; }
+    .pill.primary { background: linear-gradient(135deg,#6318CC,#8B2EF5); border-color: rgba(170,120,255,.4); box-shadow: 0 6px 26px rgba(130,46,245,.45); }
+
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 2; }
+
+    /* hero */
+    .hero { padding: 150px 0 56px; text-align: center; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px; padding: 7px 16px 7px 14px; border-radius: 50px; margin-bottom: 26px;
+      font-size: 12.5px; font-weight: 600; letter-spacing: .3px; color: rgba(225,220,255,.92);
+      background: rgba(255,255,255,.045); border: 1px solid rgba(160,130,255,.25);
+    }
+    .eyebrow svg { color: var(--teal); }
+    h1 { font-size: clamp(40px,6.4vw,76px); font-weight: 900; line-height: 1.04; letter-spacing: -1.5px; margin-bottom: 22px; }
+    h1 .shine {
+      background: linear-gradient(100deg, #5D7BFF 0%, #A86CF2 30%, #7CF2DD 50%, #A86CF2 70%, #5D7BFF 100%);
+      background-size: 220% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      animation: shine 9s linear infinite;
+    }
+    @keyframes shine { to { background-position: -220% 0; } }
+    .lead { max-width: 560px; margin: 0 auto 22px; font-size: 18px; color: var(--muted); line-height: 1.7; }
+    .meta { display: inline-flex; gap: 18px; font-size: 13px; color: var(--faint); }
+    .meta span::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-left: 8px; vertical-align: 2px; box-shadow: 0 0 10px var(--teal); }
+
+    /* glass card with gradient hairline + cursor spotlight */
+    .card {
+      position: relative; border-radius: 24px; border: 1px solid transparent; isolation: isolate;
+      background:
+        linear-gradient(var(--glass), var(--glass)) padding-box,
+        linear-gradient(140deg, rgba(124,242,221,.42), rgba(139,108,255,.22) 35%, rgba(255,255,255,.05) 70%, rgba(139,108,255,.18)) border-box;
+      backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 30px 80px rgba(5,6,30,.45);
+    }
+    .card::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1; opacity: 0; transition: opacity .35s;
+      background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), rgba(124,242,221,.10), transparent 60%);
+    }
+    .card:hover::after { opacity: 1; }
+
+    /* summary */
+    .summary { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-bottom: 80px; }
+    .sum { padding: 26px 22px 24px; }
+    .ico {
+      width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; color: #7CF2DD; margin-bottom: 18px;
+      background: linear-gradient(145deg, rgba(56,232,207,.18), rgba(110,70,240,.22)); border: 1px solid rgba(124,242,221,.3);
+      box-shadow: 0 0 34px rgba(56,232,207,.18), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+    .sum h3 { font-size: 17px; font-weight: 800; margin-bottom: 6px; line-height: 1.35; }
+    .sum p { font-size: 14.5px; color: var(--muted); line-height: 1.7; }
+
+    /* layout: sticky index + content */
+    .layout { display: grid; grid-template-columns: 250px 1fr; gap: 48px; align-items: start; }
+    .index { position: sticky; top: 96px; }
+    .index-title { font-size: 11px; font-weight: 700; letter-spacing: 3px; color: rgba(180,160,255,.75); margin-bottom: 14px; }
+    .index nav, .index .list { position: static; height: auto; background: none; border: 0; padding: 0; display: block; backdrop-filter: none; }
+    .list a {
+      display: flex; align-items: baseline; gap: 12px; padding: 7px 14px 7px 0; margin-bottom: 2px;
+      color: rgba(200,205,255,.6); font-size: 14px; line-height: 1.45; border-right: 2px solid rgba(140,150,255,.12);
+      transition: color .25s, border-color .25s, padding .25s;
+    }
+    .list a i { font-style: normal; font-size: 11px; font-weight: 700; color: rgba(160,170,255,.45); font-variant-numeric: tabular-nums; letter-spacing: 1px; min-width: 18px; }
+    .list a:hover { color: #fff; }
+    .list a.on { color: #fff; border-right-color: var(--teal); padding-right: 6px; }
+    .list a.on i { color: var(--teal); }
+
+    .chips { display: none; }
+
+    /* sections */
+    .sec { padding: 34px 38px; margin-bottom: 18px; }
+    .sec-top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+    .sec-n {
+      font-size: 13px; font-weight: 800; letter-spacing: 3px; font-variant-numeric: tabular-nums;
+      background: linear-gradient(90deg, #7CF2DD, #B9A8FF); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sec-line { flex: 1; height: 1px; background: linear-gradient(270deg, rgba(124,242,221,.4), transparent 70%); }
+    .sec h2 { font-size: 24px; font-weight: 800; line-height: 1.3; margin-bottom: 14px; letter-spacing: -.2px; }
+    .sec p { color: var(--muted); font-size: 16px; margin-bottom: 12px; }
+    .sec p:last-child { margin-bottom: 0; }
+    .sec strong { color: #fff; font-weight: 700; }
+    .sec ul { list-style: none; margin: 4px 0 16px; display: grid; gap: 8px; }
+    .sec li { position: relative; padding-right: 22px; color: var(--muted); font-size: 16px; }
+    .sec li::before { content: ''; position: absolute; right: 2px; top: 12px; width: 7px; height: 7px; border-radius: 2px; transform: rotate(45deg); background: linear-gradient(135deg, var(--teal), var(--violet)); }
+    .note {
+      margin-top: 18px; padding: 16px 20px; border-radius: 16px; font-size: 15.5px; color: rgba(235,240,255,.95); line-height: 1.75;
+      background: linear-gradient(135deg, rgba(56,232,207,.10), rgba(56,232,207,.03)); border: 1px solid rgba(56,232,207,.3);
+    }
+    .note strong { color: #7CF2DD; }
+    .warning {
+      margin-top: 18px; padding: 16px 20px; border-radius: 16px; font-size: 15.5px; color: #FFC2C2;
+      background: linear-gradient(135deg, rgba(255,90,110,.12), rgba(255,90,110,.03)); border: 1px solid rgba(255,130,140,.35);
+    }
+    .warning strong { color: #fff; }
+    .sec.contact { text-align: center; padding: 44px 38px; }
+    .sec.contact .sec-top { justify-content: center; }
+    .sec.contact .sec-line { display: none; }
+    .sec.contact h2 { font-size: 28px; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 13px 26px; border-radius: 16px;
+      font-size: 15.5px; font-weight: 700; color: #fff; direction: ltr;
+      background: linear-gradient(135deg, rgba(36,72,216,.95), rgba(99,24,204,.95)); border: 1px solid rgba(170,140,255,.4);
+      box-shadow: 0 12px 40px rgba(70,50,230,.5); transition: transform .2s, box-shadow .2s;
+    }
+    .contact-email:hover { transform: translateY(-2px); box-shadow: 0 18px 50px rgba(90,60,240,.62); color: #fff; }
+
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+    .reveal.v { opacity: 1; transform: none; }
+
+    footer { position: relative; z-index: 2; margin-top: 70px; padding: 34px 0 50px; border-top: 1px solid rgba(140,110,255,.12); }
+    .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--faint); }
+    .foot-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .foot-links a { color: rgba(205,210,255,.75); }
+
+    @media (max-width: 1020px) {
+      .summary { grid-template-columns: repeat(2,1fr); }
+      .layout { grid-template-columns: 1fr; }
+      .index { display: none; }
+      .chips { display: flex; flex-wrap: nowrap; gap: 8px; overflow-x: auto; margin: -50px -28px 28px; padding: 4px 28px 10px; scrollbar-width: none; }
+      .chips::-webkit-scrollbar { display: none; }
+      .chips a { flex-shrink: 0; padding: 8px 15px; border-radius: 50px; font-size: 13px; font-weight: 600; color: rgba(225,230,255,.9); background: rgba(255,255,255,.05); border: 1px solid rgba(150,150,255,.22); }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0 16px; }
+      .brand span { display: none; }
+      .wrap { padding: 0 18px; }
+      .hero { padding: 116px 0 44px; }
+      .lead { font-size: 16px; }
+      .summary { grid-template-columns: 1fr; gap: 12px; margin-bottom: 64px; }
+      .sum { display: flex; gap: 16px; align-items: flex-start; padding: 20px; }
+      .sum .ico { flex-shrink: 0; margin-bottom: 0; width: 46px; height: 46px; }
+      .chips { margin: -40px -18px 22px; padding: 4px 18px 10px; }
+      .sec { padding: 26px 22px; }
+      .sec h2 { font-size: 20px; }
+      .sec p, .sec li { font-size: 15.5px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .aurora i, h1 .shine { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  
+    /* phones: no background grid */
+    @media (max-width: 640px) { .grain { display: none; } }
+    /* English (left-to-right) */
+    html[dir="ltr"] body { direction: ltr; text-align: left; }
+    html[dir="ltr"] .list a { padding: 7px 0 7px 14px; border-right: 0; border-left: 2px solid rgba(140,150,255,.12); }
+    html[dir="ltr"] .list a.on { border-left-color: var(--teal); padding-left: 20px; padding-right: 0; }
+    html[dir="ltr"] .sec-line { background: linear-gradient(90deg, rgba(124,242,221,.4), transparent 70%); }
+    html[dir="ltr"] .sec li { padding-right: 0; padding-left: 22px; }
+    html[dir="ltr"] .sec li::before { right: auto; left: 2px; }
+    html[dir="ltr"] .meta span::before { margin-left: 0; margin-right: 8px; }
+    html[dir="ltr"] .eyebrow { padding: 7px 14px 7px 16px; }
+  </style>
 </head>
 <body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" id="progress"></div>
 
-<a href="terms-en.html" style="position:fixed;top:20px;left:20px;z-index:200;display:inline-flex;align-items:center;gap:6px;background:rgba(30,79,216,0.15);border:1px solid rgba(30,79,216,0.35);border-radius:20px;padding:6px 14px;font-family:-apple-system,Arial,sans-serif;font-size:13px;font-weight:600;color:#4A90D9;text-decoration:none;" onmouseover="this.style.background='rgba(30,79,216,0.28)'" onmouseout="this.style.background='rgba(30,79,216,0.15)'">🌐 English</a>
+<nav>
+  <a href="https://lironnir.github.io/stablue-website/" class="brand"><img src="data:image/jpeg;base64,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" alt="Stablue" /><span>STABLUE</span></a>
+  <div class="nav-actions">
+    <a href="terms-en.html" class="pill" lang="en">English</a>
+    <a href="https://lironnir.github.io/stablue-website/" class="pill primary">לאתר Stablue</a>
+  </div>
+</nav>
 
-<a class="back" href="/">← מדיניות פרטיות</a>
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.6-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.9-7.5-9.5V6L12 3z"/><path d="M8.8 12.2l2.2 2.2 4.3-4.6"/></svg> תנאי שימוש</span>
+    <h1>תנאי <span class="shine">שימוש</span></h1>
+    <p class="lead">הכללים לשימוש באפליקציה, בשפה פשוטה.</p>
+    <div class="meta"><span>עודכן לאחרונה: אוקטובר 2026</span><span>גרסה 1.1</span></div>
+  </header>
 
-<h1>תנאי שימוש</h1>
-<p class="updated">עודכן לאחרונה: מאי 2025</p>
+  <div class="summary">
+    <div class="card sum reveal"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-9-9.2C1.6 7.3 3.8 4 7.2 4c2 0 3.6 1.1 4.8 2.8C13.2 5.1 14.8 4 16.8 4c3.4 0 5.6 3.3 4.2 6.8C19 15.6 12 20 12 20z"/></svg></div><div><h3>לא תחליף לטיפול</h3><p>האפליקציה מיועדת לתמיכה עצמית, ואינה מחליפה טיפול נפשי, ייעוץ או אבחון.</p></div></div><div class="card sum reveal"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.4A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4.5"/></svg></div><div><h3>בינה מלאכותית ככלי תמיכה</h3><p>תגובות הבינה המלאכותית עשויות להיות לא מדויקות, ואין להסתמך עליהן לצורך רפואי.</p></div></div><div class="card sum reveal"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><path d="M7 15h3"/></svg></div><div><h3>ביטול בכל עת</h3><p>את המנוי מבטלים בכל רגע דרך הגדרות החשבון בחנות.</p></div></div><div class="card sum reveal"><div class="ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6"/><path d="M16.5 4.5l1.5 1.5 3-3"/></svg></div><div><h3>החשבון בשליטתך</h3><p>אפשר למחוק את החשבון בכל עת ממסך ההגדרות.</p></div></div>
+  </div>
 
-<h2>1. קבלת התנאים</h2>
-<p>
-  השימוש באפליקציה Stablue מהווה הסכמה לתנאי שימוש אלה. אם אינך מסכים/ה לתנאים, אנא הפסק/י את השימוש באפליקציה.
-</p>
+  <div class="chips"><a href="#s01">קבלת התנאים</a><a href="#s02">מהי האפליקציה</a><a href="#s03">אין תחליף לטיפול מקצועי</a><a href="#s04">הצ'אט עם AI</a><a href="#s05">חשבון משתמש</a><a href="#s06">מנוי ותשלומים</a><a href="#s07">קניין רוחני</a><a href="#s08">שימוש הוגן</a><a href="#s09">הגבלת אחריות</a><a href="#s10">שינויים בתנאים</a><a href="#s11">דין חל וסמכות שיפוט</a><a href="#s12">יצירת קשר</a></div>
 
-<h2>2. מהי האפליקציה</h2>
-<p>
-  Stablue היא אפליקציה לתמיכה עצמית ברגעי חרדה ומצוקה נפשית. האפליקציה מציעה תרגילים לניהול חרדה, יומן מעקב אישי, וצ'אט תמיכה מבוסס בינה מלאכותית.
-</p>
+  <div class="layout">
+    <aside class="index" aria-label="תוכן עניינים">
+      <div class="index-title">תוכן עניינים</div>
+      <div class="list" id="indexList"><a href="#s01" data-id="s01"><i>01</i><span>קבלת התנאים</span></a><a href="#s02" data-id="s02"><i>02</i><span>מהי האפליקציה</span></a><a href="#s03" data-id="s03"><i>03</i><span>אין תחליף לטיפול מקצועי</span></a><a href="#s04" data-id="s04"><i>04</i><span>הצ'אט עם AI</span></a><a href="#s05" data-id="s05"><i>05</i><span>חשבון משתמש</span></a><a href="#s06" data-id="s06"><i>06</i><span>מנוי ותשלומים</span></a><a href="#s07" data-id="s07"><i>07</i><span>קניין רוחני</span></a><a href="#s08" data-id="s08"><i>08</i><span>שימוש הוגן</span></a><a href="#s09" data-id="s09"><i>09</i><span>הגבלת אחריות</span></a><a href="#s10" data-id="s10"><i>10</i><span>שינויים בתנאים</span></a><a href="#s11" data-id="s11"><i>11</i><span>דין חל וסמכות שיפוט</span></a><a href="#s12" data-id="s12"><i>12</i><span>יצירת קשר</span></a></div>
+    </aside>
+    <main>
+      <section class="card sec reveal" id="s01">
+        <div class="sec-top"><span class="sec-n">01</span><span class="sec-line"></span></div>
+        <h2>קבלת התנאים</h2>
+        <p>השימוש באפליקציה Stablue מהווה הסכמה לתנאי שימוש אלה. אם אינך מסכים/ה לתנאים, אנא הפסק/י את השימוש באפליקציה.</p>
+      </section>
 
-<h2>3. אין תחליף לטיפול מקצועי</h2>
-<p>
-  האפליקציה <strong>אינה</strong> מהווה תחליף לטיפול נפשי מקצועי, ייעוץ פסיכולוגי, אבחון רפואי, או כל שירות בריאות מקצועי אחר. במצב של מצוקה חמורה, סכנה לחיים, או מחשבות אובדניות — יש לפנות מיידית לשירותי חירום (101) או לקו ער"ן (1201).
-</p>
+      <section class="card sec reveal" id="s02">
+        <div class="sec-top"><span class="sec-n">02</span><span class="sec-line"></span></div>
+        <h2>מהי האפליקציה</h2>
+        <p>Stablue היא אפליקציה לתמיכה עצמית ברגעי חרדה ומצוקה נפשית. האפליקציה מציעה תרגילים לניהול חרדה, יומן מעקב אישי, וצ'אט תמיכה מבוסס בינה מלאכותית. האפליקציה מופעלת על ידי Liron Nir, מפתח עצמאי מישראל.</p>
+      </section>
 
-<h2>4. הצ'אט עם AI</h2>
-<p>
-  השיחה עם הבינה המלאכותית מוגבלת ל-2 הודעות ביום למשתמשים חינמיים. תגובות ה-AI עשויות להיות שגויות ואין להסתמך עליהן לצורך רפואי או נפשי. אנו שומרים לוגים של שיחות לצורך שיפור השירות ובדיקות בטיחות.
-</p>
+      <section class="card sec reveal" id="s03">
+        <div class="sec-top"><span class="sec-n">03</span><span class="sec-line"></span></div>
+        <h2>אין תחליף לטיפול מקצועי</h2>
+        <p>האפליקציה <strong>אינה</strong> מהווה תחליף לטיפול נפשי מקצועי, ייעוץ פסיכולוגי, אבחון רפואי, או כל שירות בריאות מקצועי אחר. במצב של מצוקה חמורה, סכנה לחיים, או מחשבות אובדניות — יש לפנות מיידית לשירותי חירום (101) או לקו ער"ן (1201).</p>
+      </section>
 
-<h2>5. חשבון משתמש</h2>
-<p>
-  הרישום לאפליקציה אפשרי דרך Apple, Google, או אימייל. אתה/את אחראי/ת לשמירת פרטי הכניסה שלך. מחיקת החשבון אפשרית בכל עת דרך מסך ההגדרות.
-</p>
+      <section class="card sec reveal" id="s04">
+        <div class="sec-top"><span class="sec-n">04</span><span class="sec-line"></span></div>
+        <h2>הצ'אט עם AI</h2>
+        <p>השיחה עם הבינה המלאכותית מוגבלת לשתי הודעות ביום למשתמשים חינמיים. תגובות הבינה המלאכותית עשויות להיות שגויות ואין להסתמך עליהן לצורך רפואי או נפשי. תוכן השיחות אינו נשמר בשרתים שלנו. ההודעות מועברות לעיבוד בלבד, כמפורט במדיניות הפרטיות.</p>
+        <p>מנגנון זיהוי המצוקה בשיחה הוא כלי עזר בלבד, ואינו מבטיח זיהוי של כל מצב חירום.</p>
+      </section>
 
-<h2>6. מנוי ותשלומים</h2>
-<p>
-  האפליקציה מציעה מנוי פרימיום חודשי, רבעוני ושנתי. החיוב מתבצע דרך Apple App Store או Google Play. ניתן לבטל את המנוי בכל עת דרך הגדרות החשבון בחנות. אין החזר כספי עבור תקופות מנוי שכבר נוצלו.
-</p>
+      <section class="card sec reveal" id="s05">
+        <div class="sec-top"><span class="sec-n">05</span><span class="sec-line"></span></div>
+        <h2>חשבון משתמש</h2>
+        <p>אפשר להשתמש באפליקציה כאורח, או להירשם דרך Apple, Google או אימייל. אתה/את אחראי/ת לשמירת פרטי הכניסה שלך. מחיקת החשבון אפשרית בכל עת דרך מסך ההגדרות.</p>
+        <p>השימוש באפליקציה מיועד לבני 16 ומעלה.</p>
+      </section>
 
-<h2>7. קניין רוחני</h2>
-<p>
-  כל התוכן באפליקציה — כולל טקסטים, תרגילים, עיצוב, וקוד — הוא רכושנו הבלעדי ומוגן בזכויות יוצרים.
-</p>
+      <section class="card sec reveal" id="s06">
+        <div class="sec-top"><span class="sec-n">06</span><span class="sec-line"></span></div>
+        <h2>מנוי ותשלומים</h2>
+        <p>האפליקציה מציעה מנוי פרימיום חודשי, לשלושה חודשים ושנתי. החיוב מתבצע דרך Apple App Store או Google Play, והמנוי מתחדש אוטומטית בסוף כל תקופה, אלא אם בוטל לפני מועד החידוש, בהתאם לכללי החנות. ניתן לבטל את המנוי בכל עת דרך הגדרות החשבון בחנות.</p>
+        <p>7 ימי הפרימיום שמקבלים בהתקנה ניתנים ללא עלות, ואינם הופכים למנוי בתשלום באופן אוטומטי.</p>
+        <p>בקשות להחזר כספי מטופלות על ידי Apple או Google, בהתאם למדיניות שלהן ולהוראות הדין.</p>
+      </section>
 
-<h2>8. הגבלת אחריות</h2>
-<p>
-  האפליקציה מסופקת "כמו שהיא" (AS IS). אנו לא אחראים לכל נזק, ישיר או עקיף, שעלול להיגרם מהשימוש באפליקציה. האחריות המקסימלית שלנו לא תעלה על הסכום ששולם עבור המנוי בשלושת החודשים האחרונים.
-</p>
+      <section class="card sec reveal" id="s07">
+        <div class="sec-top"><span class="sec-n">07</span><span class="sec-line"></span></div>
+        <h2>קניין רוחני</h2>
+        <p>כל התוכן באפליקציה — כולל טקסטים, תרגילים, עיצוב, וקוד — הוא רכושנו הבלעדי ומוגן בזכויות יוצרים.</p>
+      </section>
 
-<h2>9. שינויים בתנאים</h2>
-<p>
-  אנו רשאים לעדכן את תנאי השימוש מעת לעת. שינויים מהותיים יובאו לידיעתך דרך הודעה באפליקציה. המשך השימוש לאחר השינוי מהווה הסכמה לתנאים המעודכנים.
-</p>
+      <section class="card sec reveal" id="s08">
+        <div class="sec-top"><span class="sec-n">08</span><span class="sec-line"></span></div>
+        <h2>שימוש הוגן</h2>
+        <p>אסור להשתמש באפליקציה לכל מטרה בלתי חוקית, לנסות לפגוע בשירות או לעקוף את מגבלותיו, או לעשות שימוש לרעה בשיחה עם הבינה המלאכותית. אנו רשאים להשעות או לסגור חשבון שמפר תנאים אלה.</p>
+      </section>
 
-<h2>10. יצירת קשר</h2>
-<p>
-  לכל שאלה בנוגע לתנאי השימוש, ניתן לפנות אלינו:
-  <a href="mailto:lironnir100@gmail.com">lironnir100@gmail.com</a>
-</p>
+      <section class="card sec reveal" id="s09">
+        <div class="sec-top"><span class="sec-n">09</span><span class="sec-line"></span></div>
+        <h2>הגבלת אחריות</h2>
+        <p>האפליקציה מסופקת "כמו שהיא" (AS IS). ככל שהדין מאפשר, אנו לא אחראים לכל נזק, ישיר או עקיף, שעלול להיגרם מהשימוש באפליקציה. האחריות המקסימלית שלנו לא תעלה על הסכום ששולם עבור המנוי בשלושת החודשים האחרונים.</p>
+      </section>
 
+      <section class="card sec reveal" id="s10">
+        <div class="sec-top"><span class="sec-n">10</span><span class="sec-line"></span></div>
+        <h2>שינויים בתנאים</h2>
+        <p>אנו רשאים לעדכן את תנאי השימוש מעת לעת. שינויים מהותיים יובאו לידיעתך דרך הודעה באפליקציה. המשך השימוש לאחר השינוי מהווה הסכמה לתנאים המעודכנים.</p>
+      </section>
+
+      <section class="card sec reveal" id="s11">
+        <div class="sec-top"><span class="sec-n">11</span><span class="sec-line"></span></div>
+        <h2>דין חל וסמכות שיפוט</h2>
+        <p>תנאים אלה כפופים לדיני מדינת ישראל. כל מחלוקת תידון בבתי המשפט המוסמכים בתל אביב-יפו. לפני כל הליך, נשמח לפתור דברים ישירות.</p>
+      </section>
+
+      <section class="card sec reveal contact" id="s12">
+        <div class="sec-top"><span class="sec-n">12</span><span class="sec-line"></span></div>
+        <h2>יצירת קשר</h2>
+        <p>לכל שאלה בנוגע לתנאי השימוש, ניתן לפנות אלינו: <a href="mailto:lironnir100@gmail.com">lironnir100@gmail.com</a></p>
+      </section>
+    </main>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Stablue · Liron Nir. כל הזכויות שמורות.</span>
+    <div class="foot-links">
+      <a href="https://lironnir.github.io/stablue-website/">לאתר Stablue</a><a href="../">מדיניות פרטיות</a><a href="terms-en.html" lang="en">English</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const bar = document.getElementById('progress');
+  const links = [...document.querySelectorAll('#indexList a')];
+  const secs = [...document.querySelectorAll('main .sec')];
+  let tick = false;
+  function update() {
+    tick = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = (max > 0 ? scrollY / max * 100 : 0) + '%';
+    let cur = secs[0].id;
+    for (const s of secs) if (s.getBoundingClientRect().top < innerHeight * 0.35) cur = s.id;
+    links.forEach(a => a.classList.toggle('on', a.dataset.id === cur));
+  }
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('v'); io.unobserve(e.target); } }), { threshold: 0.06 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  document.querySelectorAll('.card').forEach(c => c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--mx', (e.clientX - r.left) + 'px'); c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  }));
+</script>
 </body>
 </html>
